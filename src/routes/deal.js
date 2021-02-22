@@ -4,3 +4,6 @@ const dealController = require('../controllers/dealController');
 
 router.get('/', dealController.getAllDeals);
 router.post('/',dealController.createDeal);
+
+
+module.exports = router;
