@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
-var DealSchema = new Schema({
+var DealsSchema = new Schema({
     id: Number,
     creator_user_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -13,14 +13,8 @@ var DealSchema = new Schema({
     },
     title: String,
     status: String,
-    items: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
-        }
-    ],
     date: Date,
-    qtd: Number,
+    total: Number,
 });
 
-module.exports = mongoose.model('Deal', DealSchema);
+module.exports = mongoose.model('Deals', DealsSchema);
