@@ -2,25 +2,18 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 var DealSchema = new Schema({
-    id: Number,
-    creator_user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    org_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    title: String,
-    status: String,
+    cod: Number,
+    creator: String,
+    client: String,
+    client_organization: String,
     items: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product'
         }
     ],
-    date: Date,
-    qtd: Number,
+    //qtd: Number,
+    total: Number
 });
 
 module.exports = mongoose.model('Deal', DealSchema);
