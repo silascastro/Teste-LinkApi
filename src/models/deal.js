@@ -7,13 +7,20 @@ var DealSchema = new Schema({
     client: String,
     client_organization: String,
     items: [
-        {
+        /*{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product'
+        }*/
+        {
+            cod: Number,
+            description: String,
+            qtde: Number,
+            price: Number,
+            
         }
     ],
-    //qtd: Number,
-    total: Number
+    total: Number,
+    data: String,
 });
 
 module.exports = mongoose.model('Deal', DealSchema);

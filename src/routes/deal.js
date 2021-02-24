@@ -3,7 +3,7 @@ const router = express.Router();
 const dealController = require('../controllers/dealController');
 
 router.get('/', dealController.getAllDeals);
-router.post('/',dealController.createDeal);
-router.delete('/:id',dealController.deleteOne);
+router.get('/:data', dealController.getAllDealsByDay);
+
 
 module.exports = router;

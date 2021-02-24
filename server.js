@@ -17,9 +17,7 @@ mongoose.connection.on('error', (e)=>{
 
 //routes
 const Deal = require('./src/routes/deal');
-const Product = require('./src/routes/product');
 app.use('/deals',Deal);
-app.use('/products',Product);
 
 //pipedriver listener
 require('./src/app/listener');

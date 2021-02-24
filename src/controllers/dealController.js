@@ -1,5 +1,7 @@
 const Deal = require('../models/deal');
-const product = require('../models/product');
+const dailyDeal = require('../models/dailydeals');
+const dailydeals = require('../models/dailydeals');
+const deal = require('../models/deal');
 
 exports.getAllDeals = (req, res, next) => {
     Deal.find((err, result) => {
@@ -12,46 +14,33 @@ exports.getAllDeals = (req, res, next) => {
     })
 };
 
-exports.createDeal = (req, res, next) => {
-    const deal = new Deal({
-        cod: 3,
-        creator: "silas",
-        client: "Bill Gates",
-        client_organization: "Microsfot",
-        items: [
-            "60356234d886631e4c81ca47",
-            "603565ef7a2f3d329c060ed4",
-        ],
-        total: 2000
-    });
-
-    deal.save(deal, (err, result) => {
-        if (result)
-            res.send(result);
-        else
-            res.send({
+exports.getAllDealsByDay = (req, res, next) => {
+    const data = req.params.data;
+    dailydeals.findOne({
+        data: data
+    }, (err, result) => {
+        if (result) {
+            const total = result.total;
+            const data = result.data;
+            const pedidos = result.pedidos;
+            deal.find({_id: pedidos}, (err, result) => {
+                if (result){
+                    let obj = {
+                        result,
+                        total_pedido: total,
+                        data: data
+                    }
+                    res.send(obj);
+                }
+                    
+                else
+                    res.send({
+                        msg: "Aconteceu um erro"
+                    });
+            })
+        } else
+            res.status(500).send({
                 msg: "Aconteceu um erro"
             });
     })
-}
-
-exports.deleteOne = (req, res) => {
-    const id = req.params.id;
-    product.deleteOne(id).then(result => {
-        if (!result){
-            res.send({
-                msg: "Aconteceu um erro"
-            });
-        }else{
-        res.send(result);
-        }
-
-
-
-    })
-
-}
-
-exports.insertDealToDeals = (req, res, next) => {
-
 };
